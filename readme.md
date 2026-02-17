@@ -5,3 +5,5 @@ go mod init example.com/first-app
 go build
 ./first-app
 clear
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+go run .

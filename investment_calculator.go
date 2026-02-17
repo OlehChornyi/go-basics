@@ -10,13 +10,16 @@ func main() {
 	var investmentAmount float64
 	years, expectedReturnRate := 10.0, 5.5
 
-	fmt.Print("Investment Amount: ")
+	// fmt.Print("Investment Amount: ")
+	outputText("Investment Amount: ")
 	fmt.Scan(&investmentAmount)
 
-	fmt.Print("Expected Return Rate: ")
+	// fmt.Print("Expected Return Rate: ")
+	outputText("Expected Return Rate: ")
 	fmt.Scan(&expectedReturnRate)
 
-	fmt.Print("Investment Horizon(years): ")
+	// fmt.Print("Investment Horizon(years): ")
+	outputText("Investment Horizon(years): ")
 	fmt.Scan(&years)
 
 	futureValue := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
@@ -30,7 +33,9 @@ func main() {
 	fmt.Print(formattedFV, formattedRFV)
 }
 
-// Profit Calculator
+func outputText(text string) { fmt.Print(text) }
+
+// Excercise 1: Profit Calculator
 // func main() {
 // 	var revenue float64
 // 	var expences float64

@@ -1,8 +1,8 @@
 package main
 
-import (
-	"fmt"
-)
+// import (
+// 	"fmt"
+// )
 
 // const inflationRate = 2.5
 
@@ -45,6 +45,7 @@ import (
 // 	return
 // }
 
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Excercise 1: Profit Calculator
 // func main() {
 // 	var revenue float64
@@ -69,29 +70,31 @@ import (
 // 	fmt.Println(ratio)
 // }
 
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 // Excercise 2: Profit Calculator refactoring
-func main() {
-	revenue := getUserInput("Revenue: ")
-	expences := getUserInput("Expences: ")
-	taxRate := getUserInput("Tax Rate: ")
+// func main() {
+// 	revenue := getUserInput("Revenue: ")
+// 	expences := getUserInput("Expences: ")
+// 	taxRate := getUserInput("Tax Rate: ")
 
-	ebt, profit, ratio := calculateFinancials(revenue, expences, taxRate)
+// 	ebt, profit, ratio := calculateFinancials(revenue, expences, taxRate)
 
-	fmt.Printf("%.1f\n", ebt)
-	fmt.Printf("%.2f\n", profit)
-	fmt.Printf("%.3f\n", ratio)
-}
+// 	fmt.Printf("%.1f\n", ebt)
+// 	fmt.Printf("%.2f\n", profit)
+// 	fmt.Printf("%.3f\n", ratio)
+// }
 
-func getUserInput(infoText string) float64 {
-	var userInput float64
-	fmt.Print(infoText)
-	fmt.Scan(&userInput)
-	return userInput
-}
+// func getUserInput(infoText string) float64 {
+// 	var userInput float64
+// 	fmt.Print(infoText)
+// 	fmt.Scan(&userInput)
+// 	return userInput
+// }
 
-func calculateFinancials(revenue, expences, taxRate float64) (ebt, profit, ratio float64) {
-	ebt = revenue - expences
-	profit = ebt * (1 - taxRate/100)
-	ratio = ebt / profit
-	return
-}
+// func calculateFinancials(revenue, expences, taxRate float64) (ebt, profit, ratio float64) {
+// 	ebt = revenue - expences
+// 	profit = ebt * (1 - taxRate/100)
+// 	ratio = ebt / profit
+// 	return
+// }

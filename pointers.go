@@ -1,17 +1,17 @@
 package main
 
-import "fmt"
+// import "fmt"
 
-func main() {
-	age := 32
+// func main() {
+// 	age := 32
 
-	var agePointer *int
-	agePointer = &age
+// 	var agePointer *int
+// 	agePointer = &age
 
-	fmt.Println("Age:", *agePointer)
-	fmt.Println(getAdultYears(agePointer))
-}
+// 	fmt.Println("Age:", *agePointer)
+// 	fmt.Println(getAdultYears(agePointer))
+// }
 
-func getAdultYears(age *int) int {
-	return *age - 18
-}
+// func getAdultYears(age *int) int {
+// 	return *age - 18
+// }

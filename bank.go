@@ -1,153 +1,130 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"os"
+
+	"example.com/bank/fileops"
+	"github.com/Pallinder/go-randomdata"
 )
 
-// const accountBalanceFile = "balance.txt"
+const accountBalanceFile = "balance.txt"
+const defaultBalanceValue = 1000
 
-// func getBalanceFromFile() (float64, error) {
-// 	data, err := os.ReadFile(accountBalanceFile)
+func main() {
+	var accountBalance, err = fileops.GetFloatFromFile(accountBalanceFile, defaultBalanceValue)
 
-// 	if err != nil {
-// 		return 1000, errors.New("Failed to find balance file.")
-// 	}
+	if err != nil {
+		fmt.Println("ERROR")
+		fmt.Println(err)
+		fmt.Println("----------")
+		panic("Can't continue. Sorry.")
+	}
 
-// 	balanceData := string(data)
-// 	balance, err := strconv.ParseFloat(balanceData, 64)
+	fmt.Println("Welcome to Go Bank!")
+	fmt.Println("Reach us 24/7", randomdata.PhoneNumber())
 
-// 	if err != nil {
-// 		return 1000, errors.New("Failed to parse stored balance value.")
-// 	}
+	for {
+		presentOprions()
 
-// 	return balance, nil
-// }
+		var choice int
+		fmt.Print("Your choice: ")
+		fmt.Scan(&choice)
 
-// func writeBalanceToFile(balance float64) {
-// 	balanceText := fmt.Sprint(balance)
-// 	os.WriteFile(accountBalanceFile, []byte(balanceText), 0644)
-// }
+		switch choice {
+		case 1:
+			fmt.Println("Your balance is", accountBalance)
 
-// func main() {
-// 	var accountBalance, err = getBalanceFromFile()
+		case 2:
+			fmt.Print("Your deposit: ")
+			var depositAmount float64
+			fmt.Scan(&depositAmount)
 
-// 	if err != nil {
-// 		fmt.Println("ERROR")
-// 		fmt.Println(err)
-// 		fmt.Println("----------")
-// 		panic("Can't continue. Sorry.")
-// 	}
+			if depositAmount <= 0 {
+				fmt.Println("Invalid ammount. Must be greater than 0.")
+				continue
+			}
 
-// 	fmt.Println("Welcome to Go Bank!")
+			accountBalance += depositAmount
+			fmt.Println("Balance updated! New amount:", accountBalance)
+			fileops.WriteFloatToFile(accountBalance, accountBalanceFile)
+		case 3:
+			fmt.Print("Withdrawal amount: ")
+			var withdrawAmount float64
+			fmt.Scan(&withdrawAmount)
 
-// 	for {
-// 		fmt.Println("What do you want to do?")
-// 		fmt.Println("1. Check balance")
-// 		fmt.Println("2. Deposit money")
-// 		fmt.Println("3. Withdraw money")
-// 		fmt.Println("4. Exit")
+			if withdrawAmount <= 0 {
+				fmt.Println("Invalid ammount. Must be greater than 0.")
+				continue
+			}
 
-// 		var choice int
-// 		fmt.Print("Your choice: ")
-// 		fmt.Scan(&choice)
+			if withdrawAmount > accountBalance {
+				fmt.Println("Invalid ammount. You can't withdraw more than you have.")
+				continue
+			}
 
-// 		switch choice {
-// 		case 1:
-// 			fmt.Println("Your balance is", accountBalance)
+			accountBalance -= withdrawAmount
+			fmt.Println("Balance updated! New amount:", accountBalance)
+			fileops.WriteFloatToFile(accountBalance, accountBalanceFile)
+		default:
+			fmt.Println("Goodbye!")
+			fmt.Println("Thanks for choosing our bank!")
+			return
+		}
+	}
 
-// 		case 2:
-// 			fmt.Print("Your deposit: ")
-// 			var depositAmount float64
-// 			fmt.Scan(&depositAmount)
-
-// 			if depositAmount <= 0 {
-// 				fmt.Println("Invalid ammount. Must be greater than 0.")
-// 				continue
-// 			}
-
-// 			accountBalance += depositAmount
-// 			fmt.Println("Balance updated! New amount:", accountBalance)
-// 			writeBalanceToFile(accountBalance)
-// 		case 3:
-// 			fmt.Print("Withdrawal amount: ")
-// 			var withdrawAmount float64
-// 			fmt.Scan(&withdrawAmount)
-
-// 			if withdrawAmount <= 0 {
-// 				fmt.Println("Invalid ammount. Must be greater than 0.")
-// 				continue
-// 			}
-
-// 			if withdrawAmount > accountBalance {
-// 				fmt.Println("Invalid ammount. You can't withdraw more than you have.")
-// 				continue
-// 			}
-
-// 			accountBalance -= withdrawAmount
-// 			fmt.Println("Balance updated! New amount:", accountBalance)
-// 			writeBalanceToFile(accountBalance)
-// 		default:
-// 			fmt.Println("Goodbye!")
-// 			fmt.Println("Thanks for choosing our bank!")
-// 			return
-// 		}
-// 	}
-
-// }
+}
 
 // Excercise 3: Profit Calculator refactoring
-func main() {
-	revenue, err := getUserInput("Revenue: ")
+// func main() {
+// 	revenue, err := getUserInput("Revenue: ")
 
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+// 	if err != nil {
+// 		fmt.Println(err)
+// 		return
+// 	}
 
-	expences, err := getUserInput("Expences: ")
+// 	expences, err := getUserInput("Expences: ")
 
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+// 	if err != nil {
+// 		fmt.Println(err)
+// 		return
+// 	}
 
-	taxRate, err := getUserInput("Tax Rate: ")
+// 	taxRate, err := getUserInput("Tax Rate: ")
 
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+// 	if err != nil {
+// 		fmt.Println(err)
+// 		return
+// 	}
 
-	ebt, profit, ratio := calculateFinancials(revenue, expences, taxRate)
+// 	ebt, profit, ratio := calculateFinancials(revenue, expences, taxRate)
 
-	fmt.Printf("%.1f\n", ebt)
-	fmt.Printf("%.2f\n", profit)
-	fmt.Printf("%.3f\n", ratio)
-	storeResults(ebt, profit, ratio)
-}
+// 	fmt.Printf("%.1f\n", ebt)
+// 	fmt.Printf("%.2f\n", profit)
+// 	fmt.Printf("%.3f\n", ratio)
+// 	storeResults(ebt, profit, ratio)
+// }
 
-func storeResults(ebt, profit, ratio float64) {
-	results := fmt.Sprintf("EBT: %.1f\nProfit: %.1f\nRation: %.3f\n", ebt, profit, ratio)
-	os.WriteFile("results.txt", []byte(results), 0644)
-}
+// func storeResults(ebt, profit, ratio float64) {
+// 	results := fmt.Sprintf("EBT: %.1f\nProfit: %.1f\nRation: %.3f\n", ebt, profit, ratio)
+// 	os.WriteFile("results.txt", []byte(results), 0644)
+// }
 
-func calculateFinancials(revenue, expences, taxRate float64) (ebt, profit, ratio float64) {
-	ebt = revenue - expences
-	profit = ebt * (1 - taxRate/100)
-	ratio = ebt / profit
-	return
-}
+// func calculateFinancials(revenue, expences, taxRate float64) (ebt, profit, ratio float64) {
+// 	ebt = revenue - expences
+// 	profit = ebt * (1 - taxRate/100)
+// 	ratio = ebt / profit
+// 	return
+// }
 
-func getUserInput(infoText string) (float64, error) {
-	var userInput float64
-	fmt.Print(infoText)
-	fmt.Scan(&userInput)
+// func getUserInput(infoText string) (float64, error) {
+// 	var userInput float64
+// 	fmt.Print(infoText)
+// 	fmt.Scan(&userInput)
 
-	if userInput <= 0 {
-		return 0, errors.New("Value must be a positive number.")
-	}
+// 	if userInput <= 0 {
+// 		return 0, errors.New("Value must be a positive number.")
+// 	}
 
-	return userInput, nil
-}
+// 	return userInput, nil
+// }

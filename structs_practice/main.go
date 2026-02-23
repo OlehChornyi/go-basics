@@ -56,6 +56,30 @@ func main() {
 	outputData(userNote)
 }
 
+func printSomething(data interface{}) {
+	intValue, ok := data.(int)
+
+	if ok {
+		fmt.Println("Integer:", intValue+1)
+		return
+	}
+
+	floatValue, ok := data.(float64)
+
+	if ok {
+		fmt.Println("Float:", floatValue+1.0)
+		return
+	}
+	// switch data.(type) {
+	// case int:
+	// 	fmt.Println("Integer:", data)
+	// case float64:
+	// 	fmt.Println("Float:", data)
+	// default:
+	// 	fmt.Println(data)
+	// }
+}
+
 func outputData(data outputtable) error {
 	data.Display()
 	return saveData(data)

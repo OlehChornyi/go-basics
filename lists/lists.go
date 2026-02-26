@@ -14,5 +14,18 @@ func main() {
 	fmt.Println(prices[2])
 
 	featuredPrices := prices[1:3]
-	fmt.Println(featuredPrices)
+	pricesOne := featuredPrices[1:]
+	pricesOne[0] = 199.99
+	pricesTwo := pricesOne[:1]
+	fmt.Println(pricesTwo)
+	fmt.Println(prices)
+	fmt.Println(len(pricesOne), cap(pricesOne))
+	fmt.Println(pricesOne)
+
+	pricesOne = pricesOne[:2]
+
+	fmt.Println(len(pricesOne), cap(pricesOne))
+	fmt.Println(pricesOne)
+
+	//Modified element in a slice also mogifies an element in original array
 }

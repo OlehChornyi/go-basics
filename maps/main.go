@@ -2,6 +2,12 @@ package main
 
 import "fmt"
 
+type floatMap map[string]float64
+
+func (m floatMap) output() {
+	fmt.Println(m)
+}
+
 func main() {
 	//1st - length, 2nd - capacity
 	userNames := make([]string, 2, 5)
@@ -14,12 +20,12 @@ func main() {
 
 	fmt.Println(userNames)
 
-	cources := make(map[string]float64, 3)
+	cources := make(floatMap, 3)
 
 	cources["go"] = 4.7
 	cources["flutter"] = 4.8
 
-	fmt.Println(cources)
+	cources.output()
 }
 
 // type Websites struct {

@@ -26,6 +26,16 @@ func main() {
 	cources["flutter"] = 4.8
 
 	cources.output()
+
+	for index, value := range userNames {
+		fmt.Println(index)
+		fmt.Println(value)
+	}
+
+	for key, value := range cources {
+		fmt.Println(key)
+		fmt.Println(value)
+	}
 }
 
 // type Websites struct {

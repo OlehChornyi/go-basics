@@ -4,10 +4,12 @@ import "fmt"
 
 // Variadic functions work with any ammount of parameters
 func main() {
-	// numbers := []int{1, 10, 15}
+	numbers := []int{1, 10, 15}
 	sum := sumup(1, 10, 15, 40, -5)
+	anotherSum := sumup(1, numbers...)
 
 	fmt.Println(sum)
+	fmt.Println(anotherSum)
 }
 
 func sumup(startingValue int, numbers ...int) int {

@@ -14,7 +14,7 @@ func main() {
 
 func sumup(startingValue int, numbers ...int) int {
 	sum := 0
-
+	fmt.Println(startingValue)
 	for _, val := range numbers {
 		sum += val
 	}
